@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "fa61581f-1e2a-401d-83cc-a3301344b30e",
+		"name": "Shift",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/users/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8081/api/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				},
+				"description": "Получение списка студентов"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/users/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8081/api/users/167",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"users",
+						"14"
+					]
+				},
+				"description": "Получение студента по id"
+			},
+			"response": []
+		}
+	]
+}
