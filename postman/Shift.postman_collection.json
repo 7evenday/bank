@@ -50,6 +50,67 @@
 				"description": "Получение предложение по id"
 			},
 			"response": []
+		},
+		{
+			"name": "/api/offers/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/offers/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"offers",
+						"{id}"
+					]
+				},
+				"description": "Удаление предложения по id"
+			},
+			"response": []
+		},
+		{
+			"name": "/api/offers/{id}",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Жадный Гриша\",\n    \"sum\": 20}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v001/books",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"offers"
+					]
+				},
+				"description": "Создание нового предложения"
+			},
+			"response": []
 		}
 	]
 }

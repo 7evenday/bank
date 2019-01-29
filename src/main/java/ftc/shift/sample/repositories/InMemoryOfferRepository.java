@@ -12,8 +12,12 @@ public class InMemoryOfferRepository implements OfferRepository {
 
     private Map<String, Offer> offerCache = new HashMap<>();
 
+    private static Integer numOfOffers = 0;
+
     public InMemoryOfferRepository(){
-        offerCache.put("1", new Offer("1", "Petya", 2500));
+        offerCache.put("0", new Offer("0", "0", "Petya", 250));
+        offerCache.put("1", new Offer("0", "1", "Классный челик", 2500));
+        numOfOffers += 2;
     }
 
     @Override
@@ -29,13 +33,17 @@ public class InMemoryOfferRepository implements OfferRepository {
 
     @Override
     public Offer createOffer(Offer offer){
-        offer.setId(String.valueOf(System.currentTimeMillis()));
+        offer.setId(String.valueOf(numOfOffers));
+        numOfOffers++;
         offerCache.put(offer.getId(), offer);
         return offer;
     }
 
     @Override
     public void deleteOffer(String id){
+        numOfOffers--;
+        //User user = UserService.provideUser(offerCache.get(id).getUserid());
+        //user.setBalance(user.getBalance() - offerCache.get(id).getSum);
         offerCache.remove(id);
     }
 
