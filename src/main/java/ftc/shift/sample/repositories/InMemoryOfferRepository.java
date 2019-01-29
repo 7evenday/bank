@@ -1,6 +1,8 @@
 package ftc.shift.sample.repositories;
 
 import ftc.shift.sample.models.Offer;
+import ftc.shift.sample.models.User;
+import ftc.shift.sample.services.UserService;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
@@ -16,7 +18,7 @@ public class InMemoryOfferRepository implements OfferRepository {
 
     public InMemoryOfferRepository(){
         offerCache.put("0", new Offer("0", "0", "Petya", 250));
-        offerCache.put("1", new Offer("0", "1", "Классный челик", 2500));
+        offerCache.put("1", new Offer("1", "2", "Бабуров Никита", 300));
         numOfOffers += 2;
     }
 
@@ -42,9 +44,11 @@ public class InMemoryOfferRepository implements OfferRepository {
     @Override
     public void deleteOffer(String id){
         numOfOffers--;
-        //User user = UserService.provideUser(offerCache.get(id).getUserid());
-        //user.setBalance(user.getBalance() - offerCache.get(id).getSum);
-        offerCache.remove(id);
+        User user = UserService.provideUser(offerCache.get(id).getUserid());
+        if (user.getBalance() >= offerCache.get(id).getSum()) {
+            user.setBalance(user.getBalance() - offerCache.get(id).getSum());
+            offerCache.remove(id);
+        }
     }
 
     @Override
