@@ -1,4 +1,4 @@
-package ftc.shift.sample;
+/*package ftc.shift.sample;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,3 +14,4 @@ public class SpringbootSampleApplicationTests {
 	}
 
 }
+*/
