@@ -22,12 +22,6 @@ public class InMemoryOfferRepository implements OfferRepository {
     }
 
     @Override
-    public Offer updateOffer(Offer offer){
-        offerCache.put(offer.getId(), offer);
-        return offer;
-    }
-
-    @Override
     public Offer createOffer(Offer offer){
         if (UserService.provideUser(offer.getUserid()).getBalance() >= offer.getSum()) {
             offer.setId(String.valueOf(UUID.randomUUID()));

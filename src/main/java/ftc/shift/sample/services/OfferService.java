@@ -10,20 +10,15 @@ import java.util.*;
 @Service
 public class OfferService {
 
-    private final OfferRepository offerRepository;
+    private static OfferRepository offerRepository;
 
     @Autowired
-    public OfferService(OfferRepository offerRepository) {
-        this.offerRepository = offerRepository;
+    public OfferService(OfferRepository _offerRepository) {
+        offerRepository = _offerRepository;
     }
 
     public Offer provideOffer(String id) {
         return offerRepository.fetchOffer(id);
-    }
-
-    public Offer updateBook(Offer offer) {
-        offerRepository.updateOffer(offer);
-        return offer;
     }
 
     public void deleteOffer(String id) {

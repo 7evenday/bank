@@ -45,10 +45,4 @@ public class OffersController {
         service.deleteOffer(id);
         return ResponseEntity.ok().build(); //нет тела, только статус
     }
-
-    @PatchMapping(OFFER_PATH + "/{id}")
-    public ResponseEntity<Offer> updateBook(@PathVariable String id, @RequestBody Offer offer) {
-        Offer result = service.updateBook(offer);
-        return ResponseEntity.ok(result);
-    }
 }

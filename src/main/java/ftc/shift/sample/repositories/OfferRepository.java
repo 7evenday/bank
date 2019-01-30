@@ -8,8 +8,6 @@ public interface OfferRepository {
 
     Offer fetchOffer(String id);
 
-    Offer updateOffer(Offer offer);
-
     void deleteOffer(String id);
 
     Offer createOffer(Offer offer);

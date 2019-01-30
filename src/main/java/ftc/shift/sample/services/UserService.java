@@ -12,7 +12,6 @@ import java.util.Collection;
 public class UserService {
 
     private static UserRepository userRepository;
-    //private final UserRepository userRepository;
 
     @Autowired
     public UserService(UserRepository _userRepository){
