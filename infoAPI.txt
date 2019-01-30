@@ -1,0 +1,30 @@
+GET ./api/users
+	Response : Collection of users: {"id":String,"name":String,"balance":Integer,"debt":Integer}
+
+GET ./api/users/{id}
+	Response : User: {"id":String,"name":String,"balance":Integer,"debt":Integer}
+
+POST ./api/users
+	Request : User: {"name":String,"balance":Integer,"debt":Integer}
+	if "name" is empty then Response is null
+	if everything is OK then Response is User
+
+DELETE ./api/users/{id}
+	Response is empty
+
+PATCH ./api/users/[id]
+	Request : User
+	Response : User
+
+GET ./api/offers
+	Response : List of offers : {"id":String,"userid":String,"username":String,"sum":Integer}
+
+GET ./api/offers/{id}
+	Response : Offer 
+
+POST ./api/offers
+	Request : Offer : {"userid":String, "username":String, "sum":Integer}
+	Response : Offer
+
+DELETE ./api/offers/{id}
+	Response is empty
