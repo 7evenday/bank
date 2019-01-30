@@ -12,9 +12,12 @@ POST ./api/users
 DELETE ./api/users/{id}
 	Response is empty
 
-PATCH ./api/users/[id]
+PATCH ./api/users/{id}
 	Request : User
-	Response : User
+	Response : User, 
+		or 
+	if the user was bad then 
+	Response : null
 
 GET ./api/offers
 	Response : List of offers : {"id":String,"userid":String,"username":String,"sum":Integer}
@@ -26,5 +29,6 @@ POST ./api/offers
 	Request : Offer : {"userid":String, "username":String, "sum":Integer}
 	Response : Offer
 
-DELETE ./api/offers/{id}
+DELETE ./api/offers
+	Request : Offer which User choose and User who accepts the offer
 	Response is empty

@@ -46,9 +46,25 @@ public class UsersController {
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping(USER_PATH + "/{id}")
+    public User updateUserPost(@PathVariable String id, @RequestBody User user) {
+        User userServer = service.provideUser(id);
+        if (userServer != null) {
+            User result = service.updateUser(user);
+            return result;
+        } else {
+            return null;
+        }
+    }
+
     @PatchMapping(USER_PATH + "/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User user) {
-        User result = service.updateUser(user);
-        return ResponseEntity.ok(result);
+    public User updateUser(@PathVariable String id, @RequestBody User user) {
+        User userServer = service.provideUser(id);
+        if (userServer != null) {
+            User result = service.updateUser(user);
+            return result;
+        } else {
+            return null;
+        }
     }
 }

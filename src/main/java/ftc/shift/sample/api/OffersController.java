@@ -1,6 +1,6 @@
 package ftc.shift.sample.api;
 
-
+import ftc.shift.sample.models.User;
 import ftc.shift.sample.models.Offer;
 import ftc.shift.sample.services.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +40,10 @@ public class OffersController {
         return ResponseEntity.ok(result);
     }
 
-    @DeleteMapping(OFFER_PATH + "/{id}")
-    public ResponseEntity<?> deleteOffer(@PathVariable String id) {
-        service.deleteOffer(id);
+    @DeleteMapping(OFFER_PATH)
+    public ResponseEntity<?> deleteOffer(@RequestBody Offer offer, @RequestBody User user) {
+        String id = offer.getId();
+        service.deleteOffer(id, user);
         return ResponseEntity.ok().build(); //нет тела, только статус
     }
 }

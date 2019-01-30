@@ -1,5 +1,6 @@
 package ftc.shift.sample.services;
 
+import ftc.shift.sample.models.User;
 import ftc.shift.sample.models.Offer;
 import ftc.shift.sample.repositories.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,8 @@ public class OfferService {
         return offerRepository.fetchOffer(id);
     }
 
-    public void deleteOffer(String id) {
-        offerRepository.deleteOffer(id);
+    public void deleteOffer(String id, User user) {
+        offerRepository.deleteOffer(id, user);
     }
 
 

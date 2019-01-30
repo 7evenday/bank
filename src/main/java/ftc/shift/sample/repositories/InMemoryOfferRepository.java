@@ -34,10 +34,12 @@ public class InMemoryOfferRepository implements OfferRepository {
     }
 
     @Override
-    public void deleteOffer(String id){
-        User user = UserService.provideUser(offerCache.get(id).getUserid());
-        if (user.getBalance() >= offerCache.get(id).getSum()) {
-            user.setBalance(user.getBalance() - offerCache.get(id).getSum());
+    public void deleteOffer(String id, User userReciever){
+        User userGiver = UserService.provideUser(offerCache.get(id).getUserid());
+        if (userGiver.getBalance() >= offerCache.get(id).getSum()) {
+            userReciever.setBalance(userReciever.getBalance() + offerCache.get(id).getSum());
+            userReciever.setDebt((int) (userReciever.getDebt() + 1.1*offerCache.get(id).getSum()));
+            userGiver.setBalance(userGiver.getBalance() - offerCache.get(id).getSum());
             offerCache.remove(id);
         }
     }
