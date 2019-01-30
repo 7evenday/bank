@@ -2,7 +2,7 @@ package ftc.shift.sample.repositories;
 
 import ftc.shift.sample.models.Offer;
 
-import java.util.Collection;
+import java.util.*;
 
 public interface OfferRepository {
 
@@ -14,6 +14,6 @@ public interface OfferRepository {
 
     Offer createOffer(Offer offer);
 
-    Collection<Offer> getAllOffers();
+    List<Offer> getAllOffers();
 
 }

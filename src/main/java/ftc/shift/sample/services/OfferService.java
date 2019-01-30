@@ -5,7 +5,7 @@ import ftc.shift.sample.repositories.OfferRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.*;
 
 @Service
 public class OfferService {
@@ -36,7 +36,7 @@ public class OfferService {
         return offer;
     }
 
-    public Collection<Offer> provideOffers() {
+    public List<Offer> provideOffers() {
         return offerRepository.getAllOffers();
     }
 

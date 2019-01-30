@@ -34,6 +34,12 @@ public class UsersController {
         return ResponseEntity.ok(users);
     }
 
+    @DeleteMapping(USER_PATH + "/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable String id) {
+        service.deleteUser(id);
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping(USER_PATH)
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User result = service.createUser(user);

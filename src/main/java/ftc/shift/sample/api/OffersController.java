@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
+import java.util.*;
 
 @RestController
 public class OffersController {
@@ -30,7 +30,7 @@ public class OffersController {
 
     @GetMapping(OFFER_PATH)
     public ResponseEntity<Collection<Offer>> listOffers() {
-        Collection<Offer> offers = service.provideOffers();
+        List<Offer> offers = service.provideOffers();
         return ResponseEntity.ok(offers);
     }
 

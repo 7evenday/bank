@@ -18,4 +18,6 @@ public interface UserRepository {
     User createUser(User user);
 
     Collection<User> getAllUsers();
+
+    void deleteUser(String id);
 }

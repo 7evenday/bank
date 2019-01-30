@@ -5,21 +5,15 @@ import ftc.shift.sample.models.User;
 import ftc.shift.sample.services.UserService;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
 
 @Repository
 public class InMemoryOfferRepository implements OfferRepository {
 
     private Map<String, Offer> offerCache = new HashMap<>();
 
-    private static Integer numOfOffers = 0;
-
     public InMemoryOfferRepository(){
-        offerCache.put("0", new Offer("0", "0", "Petya", 250));
-        offerCache.put("1", new Offer("1", "2", "Бабуров Никита", 300));
-        numOfOffers += 2;
     }
 
     @Override
@@ -35,15 +29,18 @@ public class InMemoryOfferRepository implements OfferRepository {
 
     @Override
     public Offer createOffer(Offer offer){
-        offer.setId(String.valueOf(numOfOffers));
-        numOfOffers++;
-        offerCache.put(offer.getId(), offer);
-        return offer;
+        if (UserService.provideUser(offer.getUserid()).getBalance() >= offer.getSum()) {
+            offer.setId(String.valueOf(UUID.randomUUID()));
+            offerCache.put(offer.getId(), offer);
+            return offer;
+        }
+        else {
+        return null;
+        }
     }
 
     @Override
     public void deleteOffer(String id){
-        numOfOffers--;
         User user = UserService.provideUser(offerCache.get(id).getUserid());
         if (user.getBalance() >= offerCache.get(id).getSum()) {
             user.setBalance(user.getBalance() - offerCache.get(id).getSum());
@@ -52,7 +49,24 @@ public class InMemoryOfferRepository implements OfferRepository {
     }
 
     @Override
-    public Collection<Offer> getAllOffers(){
-        return offerCache.values();
+    public List<Offer> getAllOffers(){
+        List<Offer> offers = new ArrayList<>(offerCache.values());
+        offers.sort(new Comparator<Offer>(){
+            @Override
+            public int compare(Offer t1, Offer t2) {
+                Integer sum1 = t1.getSum();
+                Integer sum2 = t2.getSum();
+                if (sum1 > sum2) {
+                    return 1;
+                }
+                else if (sum1 < sum2) {
+                    return -1;
+                }
+                else{
+                    return 0;
+                }
+            }
+        });
+        return offers;
     }
 }
