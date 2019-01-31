@@ -26,6 +26,20 @@ public class OfferService {
         offerRepository.deleteOffer(id, user);
     }
 
+    public Integer acceptOffer(String id, User userReciever) {
+        Offer offer = offerRepository.fetchOffer(id);
+        User userGiver = UserService.provideUser(offer.getUserid());
+        if (userGiver.getBalance() >= offer.getSum()) {
+            userReciever.setBalance(offer.getSum() + userReciever.getBalance());
+            userReciever.setDebt(offer.getSum() + userReciever.getDebt());
+            userGiver.setBalance(userGiver.getBalance() - offer.getSum());
+            offer.setIsAccepted(true);
+            return 0;
+        }
+        else{
+            return -1;
+        }
+    }
 
     public Offer createOffer (Offer offer) {
         offerRepository.createOffer(offer);

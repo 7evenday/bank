@@ -24,7 +24,9 @@ public class InMemoryOfferRepository implements OfferRepository {
     @Override
     public Offer createOffer(Offer offer){
         if (UserService.provideUser(offer.getUserid()).getBalance() >= offer.getSum()) {
+            offer.setUsername(UserService.provideUser(offer.getUserid()).getName());
             offer.setId(String.valueOf(UUID.randomUUID()));
+            offer.setIsAccepted(false);
             offerCache.put(offer.getId(), offer);
             return offer;
         }
@@ -35,18 +37,22 @@ public class InMemoryOfferRepository implements OfferRepository {
 
     @Override
     public void deleteOffer(String id, User userReciever){
-        User userGiver = UserService.provideUser(offerCache.get(id).getUserid());
-        if (userGiver.getBalance() >= offerCache.get(id).getSum()) {
-            userReciever.setBalance(userReciever.getBalance() + offerCache.get(id).getSum());
-            userReciever.setDebt((int) (userReciever.getDebt() + 1.1*offerCache.get(id).getSum()));
-            userGiver.setBalance(userGiver.getBalance() - offerCache.get(id).getSum());
-            offerCache.remove(id);
-        }
+        Offer offer = offerCache.get(id);
+        offer.setIsAccepted(true);
+        offerCache.put(offer.getId(), offer);
     }
 
     @Override
     public List<Offer> getAllOffers(){
         List<Offer> offers = new ArrayList<>(offerCache.values());
+        int index = 0;
+        Offer offer;
+        while (index < offers.size()) {
+            offer = offers.get(index);
+            if (!offer.getIsAccepted()){
+                offers.remove(index);
+            }
+        }
         offers.sort(new Comparator<Offer>(){
             @Override
             public int compare(Offer t1, Offer t2) {

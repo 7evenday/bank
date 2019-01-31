@@ -40,6 +40,17 @@ public class OffersController {
         return ResponseEntity.ok(result);
     }
 
+    @PatchMapping(OFFER_PATH + "/{id}/accept")
+    public ResponseEntity<?> acceptOffer(@PathVariable String id, @RequestBody User user){
+        Integer result = service.acceptOffer(id, user);
+        if (result == 0){
+            return ResponseEntity.ok().build();
+        }
+        else{
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     @DeleteMapping(OFFER_PATH)
     public ResponseEntity<?> deleteOffer(@RequestBody Offer offer, @RequestBody User user) {
         String id = offer.getId();

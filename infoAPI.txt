@@ -22,8 +22,12 @@ PATCH ./api/users/{id}
 GET ./api/offers
 	Response : List of offers : {"id":String,"userid":String,"username":String,"sum":Integer}
 
-GET ./api/offers/{id}
+GET ./api/offers/{offer.id}
 	Response : Offer 
+
+PATCH ./api/offers/{offer.id}/accept
+	Request : Body of a user of accepting the offer
+	Response : ok or badRequest
 
 POST ./api/offers
 	Request : Offer : {"userid":String, "username":String, "sum":Integer}

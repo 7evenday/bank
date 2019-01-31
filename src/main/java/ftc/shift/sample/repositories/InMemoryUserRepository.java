@@ -3,6 +3,7 @@ package ftc.shift.sample.repositories;
 import ftc.shift.sample.models.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.*;
 import java.util.UUID;
 import java.util.Collection;
 import java.util.Collections;
@@ -54,6 +55,9 @@ public class InMemoryUserRepository implements UserRepository {
     public User createUser(User user) {
         if (!user.getName().isEmpty()) {
             user.setId(String.valueOf(UUID.randomUUID()));
+            if (user.getBalance() == null)
+                user.setBalance(0);
+            user.setDebt(0);
             userCache.put(user.getId(), user);
             return user;
         }
@@ -63,8 +67,9 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public Collection<User> getAllUsers() {
-        return userCache.values();
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>(userCache.values());
+        return users;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ftc.shift.sample.repositories;
 
+import java.util.*;
 import ftc.shift.sample.models.User;
 
 import java.util.Collection;
@@ -17,7 +18,7 @@ public interface UserRepository {
 
     User createUser(User user);
 
-    Collection<User> getAllUsers();
+    List<User> getAllUsers();
 
     void deleteUser(String id);
 }

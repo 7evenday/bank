@@ -1,5 +1,6 @@
 package ftc.shift.sample.services;
 
+import java.util.*;
 import ftc.shift.sample.models.User;
 import ftc.shift.sample.repositories.InMemoryUserRepository;
 import ftc.shift.sample.repositories.UserRepository;
@@ -32,7 +33,7 @@ public class UserService {
         return user;
     }
 
-    public Collection<User> provideUsers() {
+    public List<User> provideUsers() {
         return userRepository.getAllUsers();
     }
 

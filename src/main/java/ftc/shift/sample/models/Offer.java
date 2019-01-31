@@ -5,6 +5,7 @@ public class Offer {
     private String userid;
     private String username;
     private Integer sum;
+    private Boolean isAccepted;// true = accepted false = pending
     public Offer() {
     }
 
@@ -13,6 +14,7 @@ public class Offer {
         this.userid = userid;
         this.username = username;
         this.sum = sum;
+        this.isAccepted = false;
     }
 
     public String getId() { return this.id;}
@@ -33,6 +35,14 @@ public class Offer {
 
     public void setUserid(String userid){
         this.userid = userid;
+    }
+
+    public Boolean getIsAccepted(){
+        return this.isAccepted;
+    }
+
+    public void setIsAccepted(Boolean status){
+        this.isAccepted = status;
     }
 }
 
