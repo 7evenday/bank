@@ -42,8 +42,19 @@ public class OfferService {
     }
 
     public Offer createOffer (Offer offer) {
-        offerRepository.createOffer(offer);
-        return offer;
+        User userGiver = UserService.provideUser(offer.getUserid());
+        if (userGiver == null){
+            return null;
+        }
+        else {
+            if((userGiver.getBalance() >= offer.getSum()) & (offer.getSum() >= 0)){
+                offer.setUsername(userGiver.getName());
+                offer.setIsAccepted(false);
+                offerRepository.createOffer(offer);
+                return offer;
+            }
+        }
+        return null;
     }
 
     public List<Offer> provideOffers() {

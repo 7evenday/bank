@@ -36,21 +36,31 @@ public class UsersController {
 
     @DeleteMapping(USER_PATH + "/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable String id) {
-        service.deleteUser(id);
-        return ResponseEntity.ok().build();
+        if (service.provideUser(id) == null){
+            return ResponseEntity.notFound().build();
+        }
+        else{
+            service.deleteUser(id);
+            return ResponseEntity.ok().build();
+        }
     }
 
     @PostMapping(USER_PATH)
     public ResponseEntity<User> createUser(@RequestBody User user) {
         User result = service.createUser(user);
-        return ResponseEntity.ok(result);
+        if (!user.getName().isEmpty()) {
+            return ResponseEntity.ok(result);
+        }
+        else{
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PatchMapping(USER_PATH + "/{id}")
     public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User user) {
         User userServer = service.provideUser(id);
         User result = null;
-        if ((userServer != null) & (id.equals(user.getId())) & (userServer.getId().equals(id))) {
+        if ((userServer != null) & (id.equals(user.getId())) & (userServer.getId().equals(id)) & (user.getBalance() >= 0)) {
             result = service.updateUser(user);
             return ResponseEntity.ok(result);
         } else {

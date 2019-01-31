@@ -1,13 +1,28 @@
+
+Bodies:
+ User = {"id":String,
+        "name":String,
+        "balance":Integer,
+        "debt":Integer}
+
+ Offer = {"id":String,
+          "userid":String,
+          "username":String,
+          "sum":Integer,
+          "IsAccepted":Boolean //Unnecessary of you, so ignore this one }
+
 GET ./api/users
-	Response : Collection of users: {"id":String,"name":String,"balance":Integer,"debt":Integer}
+	Response : Collection of Users
 
 GET ./api/users/{id}
-	Response : User: {"id":String,"name":String,"balance":Integer,"debt":Integer}
+	Response : User
 
 POST ./api/users
-	Request : User: {"name":String,"balance":Integer,"debt":Integer}
-	if "name" is empty then Response is null
-	if everything is OK then Response is User
+	Request : User
+	if "name" is empty then
+	    Response : null
+	if everything is OK then
+	    Response : User
 
 DELETE ./api/users/{id}
 	Response is empty
@@ -20,19 +35,22 @@ PATCH ./api/users/{id}
 	Response : null
 
 GET ./api/offers
-	Response : List of offers : {"id":String,"userid":String,"username":String,"sum":Integer}
+	Response : List of Offers
 
 GET ./api/offers/{offer.id}
 	Response : Offer 
 
 PATCH ./api/offers/{offer.id}/accept
-	Request : Body of a user of accepting the offer
-	Response : ok or badRequest
+	Request : Body of a User of accepting the offer
+	Response : ok or badRequest. If response is bad it means the offer cannot be accepted
 
 POST ./api/offers
-	Request : Offer : {"userid":String, "username":String, "sum":Integer}
+	Request : Offer ("userid" must not be empty and sum must not equal 0)
 	Response : Offer
+	    or
+	if request didn't met requirements then
+	Response : badRequest
 
-DELETE ./api/offers
-	Request : Offer which User choose and User who accepts the offer
-	Response is empty
+!DO NO USE! Use <PATCH ./api/offers/{offer.id}/accept> instead of //DELETE ./api/offers
+	//Request : Offer which User choose and User who accepts the offer
+	//Response is empty

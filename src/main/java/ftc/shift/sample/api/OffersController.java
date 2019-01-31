@@ -37,7 +37,12 @@ public class OffersController {
     @PostMapping(OFFER_PATH)
     public ResponseEntity<Offer> createOffer(@RequestBody Offer offer) {
         Offer result = service.createOffer(offer);
-        return ResponseEntity.ok(result);
+        if(result == null){
+            return ResponseEntity.badRequest().build();
+        }
+        else {
+            return ResponseEntity.ok(result);
+        }
     }
 
     @PatchMapping(OFFER_PATH + "/{id}/accept")
