@@ -1,4 +1,4 @@
-![logo_cft]/images/logo_cft.png
+![logocft](/images/logo_cft.png)
 # Дожить до степухи
 
 Данное приложение позволяет студентам помочь другим "несчастным", кто остался без денег до получения стипендии. 
@@ -9,7 +9,7 @@
 - [x] Добавить себя в список пользователей
 - [x] Дать другим студентам в долг
 - [x] Взять деньги в долг
-<del>- [ ] Вернуть долг</del>
+- [ ] <del>Вернуть долг</del>
 - [x] Быть добрым и щедрым человеком
 
 ## Планы на будущее
@@ -23,6 +23,6 @@
 
 # Ссылки на репозитории
 
-* [Back-end]http://github.com/7evenday/bank
-* [Front-end]http://github.com/7evenday/front
+* [Back-end](http://github.com/7evenday/bank)
+* [Front-end](http://github.com/7evenday/front)
 * Android
