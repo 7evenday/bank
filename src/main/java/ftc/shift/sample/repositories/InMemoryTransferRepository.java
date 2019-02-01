@@ -25,18 +25,47 @@ public class InMemoryTransferRepository implements TransferRepository{
     }
 
     @Override
-    public List<TransferServer> getAllTransfers(String id){
+    public List<TransferServer> getAllTransfers(String id, String type){
         List<TransferServer> transfers = new ArrayList<>(transferServerCache.values());
-        if (!id.isEmpty()) {
-            int index = 0;
-            TransferServer transfer;
+        TransferServer transfer;
+        int index = 0;
+        if (id == null) {
+            return transfers;
+        }else if (type.equals("all")) {
             while (index < transfers.size()) {
                 transfer = transfers.get(index);
                 if (!(transfer.getUserGiverId().equals(id) | (transfer.getUserRecieverId().equals(id)))) {
                     transfers.remove(index);
                 }
-                index++;
+                else {
+                    index++;
+                }
+                }
+            return transfers;
+        }
+        else if (type.equals("debts")){
+            while (index < transfers.size()) {
+                transfer = transfers.get(index);
+                if (!(transfer.getUserRecieverId().equals(id))) {
+                    transfers.remove(index);
+                }
+                else {
+                    index++;
+                }
             }
+            return transfers;
+        }
+        else if (type.equals("credits")){
+            while (index < transfers.size()) {
+                transfer = transfers.get(index);
+                if (!(transfer.getUserGiverId().equals(id))) {
+                    transfers.remove(index);
+                }
+                else{
+                    index++;
+                }
+            }
+            return transfers;
         }
         return transfers;
     }

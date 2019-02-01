@@ -25,8 +25,8 @@ public class TransferService {
         String id = UUID.randomUUID().toString();
         transferRepository.createTransfer(new TransferServer(id, transferClient));
     }
-    public List<TransferServer> provideTransfers(String userId){
-        return transferRepository.getAllTransfers(userId);
+    public List<TransferServer> provideTransfers(String userId, String type){
+        return transferRepository.getAllTransfers(userId, type);
     }
 
 }

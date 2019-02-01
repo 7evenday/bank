@@ -8,5 +8,5 @@ public interface TransferRepository {
 
     TransferServer createTransfer(TransferServer transferServer);
 
-    List<TransferServer> getAllTransfers(String id);
+    List<TransferServer> getAllTransfers(String id, String type);
 }

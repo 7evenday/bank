@@ -30,9 +30,9 @@ public class OfferService {
 
     public Integer acceptOffer(String id, User userRecieve) {
         Offer offer = offerRepository.fetchOffer(id);
-        User userReciever = UserService.provideUser(userRecieve.getId());
-        User userGiver = UserService.provideUser(offer.getUserid());
-        if (/*userGiver.getBalance() >= offer.getSum()*/true) {
+        if (!offer.getIsAccepted()) {
+            User userReciever = UserService.provideUser(userRecieve.getId());
+            User userGiver = UserService.provideUser(offer.getUserid());
             userReciever.setBalance(offer.getSum() + userReciever.getBalance());
             userReciever.setDebt(offer.getSum() + userReciever.getDebt());
             //userGiver.setBalance(userGiver.getBalance() - offer.getSum());

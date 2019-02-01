@@ -23,16 +23,11 @@ public class InMemoryOfferRepository implements OfferRepository {
 
     @Override
     public Offer createOffer(Offer offer){
-        if (UserService.provideUser(offer.getUserid()).getBalance() >= offer.getSum()) {
             offer.setUsername(UserService.provideUser(offer.getUserid()).getName());
             offer.setId(String.valueOf(UUID.randomUUID()));
             offer.setIsAccepted(false);
             offerCache.put(offer.getId(), offer);
             return offer;
-        }
-        else {
-        return null;
-        }
     }
 
     @Override
@@ -52,18 +47,20 @@ public class InMemoryOfferRepository implements OfferRepository {
             offer = offers.get(index);
             if (offer.getIsAccepted()){
                 offers.remove(index);
+            }else{
+                index++;
             }
-            index++;
+
         }
         offers.sort(new Comparator<Offer>(){
             @Override
             public int compare(Offer t1, Offer t2) {
                 Integer sum1 = t1.getSum();
                 Integer sum2 = t2.getSum();
-                if (sum1 > sum2) {
+                if (sum1 < sum2) {
                     return 1;
                 }
-                else if (sum1 < sum2) {
+                else if (sum1 > sum2) {
                     return -1;
                 }
                 else{

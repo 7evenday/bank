@@ -11,13 +11,15 @@ public class TransferServer {
     private final String userRecieverId;
     private final Integer sum;
     private final String timeAccepted;
+    private Boolean isClosed;
 
     public TransferServer(String id, TransferClient transferClient){
         this.id = id;
         this.userGiverId = transferClient.getUserGiverId();
         this.userRecieverId = transferClient.getUserRecieverId();
         this.sum = transferClient.getSum();
-        this.timeAccepted = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        this.timeAccepted = (new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime()));
+        this.isClosed = false;
     }
 
     public TransferServer(String id, String userGiverId, String userRecieverId, Integer sum){
@@ -26,6 +28,7 @@ public class TransferServer {
         this.userRecieverId = userGiverId;
         this.sum = sum;
         this.timeAccepted = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        this.isClosed = false;
     }
 /*
     public void setUserGiverId(String userGiverId) {
@@ -57,4 +60,7 @@ public class TransferServer {
         return sum;
     }
 
+    public Boolean getClosed() {
+        return isClosed;
+    }
 }

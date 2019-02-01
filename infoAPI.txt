@@ -12,9 +12,10 @@ Bodies:
           "IsAccepted":Boolean //Unnecessary of you, so ignore this one }
  Transfer = {"id":String, 
 	     "userGiverId":String,
-             "userRecieverId":String,
+         "userRecieverId":String,
 	     "sum":Int,
-	     "timeAccepted":String}
+	     "timeAccepted":String,
+	     "isClosed":Boolean}
 
 
 GET ./api/users
@@ -48,7 +49,7 @@ GET ./api/offers
 	Response : List of Offers
 
 GET ./api/offers/{offer.id}
-	Response : Offer 
+	Response : Offer that has offer.id as his own id
 
 PATCH ./api/offers/{offer.id}/accept
 	Request : Body of a User of accepting the offer
@@ -67,3 +68,9 @@ DELETE ./api/offers/{offer.id}/delete?userid={user.id}
 
 GET ./api/transfers/{user.id}
     Response : list of transfers that somehow connected to user.id
+
+GET ./api/transfers/{user.id}/debts
+    Response : list of transfers that are debts
+
+GET ./api/transfers/{user.id}/credits
+    Response : list of transfers that are credits
