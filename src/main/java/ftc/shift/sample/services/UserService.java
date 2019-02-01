@@ -23,7 +23,7 @@ public class UserService {
         return userRepository.fetchUser(id);
     }
 
-    public User updateUser(User user) {
+    public static User updateUser(User user) {
         userRepository.updateUser(user);
         return user;
     }

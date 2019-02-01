@@ -36,8 +36,9 @@ public class InMemoryOfferRepository implements OfferRepository {
     }
 
     @Override
-    public void deleteOffer(String id, User userReciever){
+    public void deleteOffer(String id){
         Offer offer = offerCache.get(id);
+        UserService.provideUser(offer.getUserid()).setBalance(UserService.provideUser(offer.getUserid()).getBalance() + offer.getSum());
         offer.setIsAccepted(true);
         offerCache.put(offer.getId(), offer);
     }
@@ -49,9 +50,10 @@ public class InMemoryOfferRepository implements OfferRepository {
         Offer offer;
         while (index < offers.size()) {
             offer = offers.get(index);
-            if (!offer.getIsAccepted()){
+            if (offer.getIsAccepted()){
                 offers.remove(index);
             }
+            index++;
         }
         offers.sort(new Comparator<Offer>(){
             @Override

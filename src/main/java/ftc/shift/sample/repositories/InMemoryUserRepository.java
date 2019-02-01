@@ -23,12 +23,12 @@ public class InMemoryUserRepository implements UserRepository {
         String tmp = UUID.randomUUID().toString();
         userCache.put(tmp, new User(tmp, "Попов Александр Иванович", 1500, 0));
         tmp = UUID.randomUUID().toString();
-        userCache.put(tmp, new User(tmp, "Бабуров Никита Александрович", 100, 0));
+        userCache.put(tmp, new User(tmp, "Бабуров Никита Александрович", 100, 600));
         tmp = UUID.randomUUID().toString();
-        userCache.put(tmp, new User(tmp, "Гончаров Сергей Анатольевич", 2700, 0));
+        userCache.put(tmp, new User(tmp, "Гончаров Сергей Анатольевич", 2700, 357));
         tmp = UUID.randomUUID().toString();
-        userCache.put(tmp, new User(tmp, "Варнакин Илья Сергеевич", 687, 0));
-        tmp = UUID.randomUUID().toString();
+        userCache.put(tmp, new User(tmp, "Варнакин Илья Сергеевич", 687, 5));
+        /*tmp = UUID.randomUUID().toString();
         userCache.put(tmp, new User(tmp, "Гончаров Сергей Анатольевич", 1999, 0));
         tmp = UUID.randomUUID().toString();
         userCache.put(tmp, new User(tmp, "Береснев Дмитрий Евгеньевич", 1488, 0));
@@ -38,6 +38,18 @@ public class InMemoryUserRepository implements UserRepository {
         userCache.put(tmp, new User(tmp, "Зубарев Даниил Евгеньевич", 564, 0));
         tmp = UUID.randomUUID().toString();
         userCache.put(tmp, new User(tmp, "Осин Виктор Викторович", 2345, 0));
+        tmp = UUID.randomUUID().toString();
+        userCache.put(tmp, new User(tmp, "Павлова Мария Александровна", 256, 0));
+        tmp = UUID.randomUUID().toString();
+        userCache.put(tmp, new User(tmp, "Осипова Дарья Батьковна", 56, 0));
+        tmp = UUID.randomUUID().toString();
+        userCache.put(tmp, new User(tmp, "Loqiemean мой альбом никому не понравится", 666, 666));
+        tmp = UUID.randomUUID().toString();
+        userCache.put(tmp, new User(tmp, "Оксюморон Анна Витальевна", 777, 0));
+        tmp = UUID.randomUUID().toString();
+        userCache.put(tmp, new User(tmp, "Эпова Александа Анатольева", 1200, 0));
+        tmp = UUID.randomUUID().toString();
+        userCache.put(tmp, new User(tmp, "Хаски из клекти", 220, 0));*/
     }
 
     @Override

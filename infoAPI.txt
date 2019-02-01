@@ -10,6 +10,12 @@ Bodies:
           "username":String,
           "sum":Integer,
           "IsAccepted":Boolean //Unnecessary of you, so ignore this one }
+ Transfer = {"id":String, 
+	     "userGiverId":String,
+             "userRecieverId":String,
+	     "sum":Int,
+	     "timeAccepted":String}
+
 
 GET ./api/users
 	Response : Collection of Users
@@ -34,6 +40,10 @@ PATCH ./api/users/{id}
 	if the user was bad then 
 	Response : null
 
+PATCH ./api/users/{id}/addcash?sum={int}
+PATCH ./api/users/{id}/lowerdebt?sum={int}
+    response : body of a user with a new balance and a new debt
+
 GET ./api/offers
 	Response : List of Offers
 
@@ -51,6 +61,9 @@ POST ./api/offers
 	if request didn't met requirements then
 	Response : badRequest
 
-!DO NO USE! Use <PATCH ./api/offers/{offer.id}/accept> instead of //DELETE ./api/offers
-	//Request : Offer which User choose and User who accepts the offer
-	//Response is empty
+DELETE ./api/offers/{offer.id}/delete?userid={user.id}
+    To cancel the offer give user.id of an active user, and he is an owner of this offer, he can delete it
+    If userId
+
+GET ./api/transfers/{user.id}
+    Response : list of transfers that somehow connected to user.id

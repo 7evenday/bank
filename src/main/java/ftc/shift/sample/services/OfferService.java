@@ -1,5 +1,6 @@
 package ftc.shift.sample.services;
 
+import ftc.shift.sample.models.TransferClient;
 import ftc.shift.sample.models.User;
 import ftc.shift.sample.models.Offer;
 import ftc.shift.sample.repositories.OfferRepository;
@@ -22,18 +23,21 @@ public class OfferService {
         return offerRepository.fetchOffer(id);
     }
 
-    public void deleteOffer(String id, User user) {
-        offerRepository.deleteOffer(id, user);
+    public void deleteOffer(String id) {
+        //UserService.provideUser(offerRepository.fetchOffer(id))
+        offerRepository.deleteOffer(id);
     }
 
-    public Integer acceptOffer(String id, User userReciever) {
+    public Integer acceptOffer(String id, User userRecieve) {
         Offer offer = offerRepository.fetchOffer(id);
+        User userReciever = UserService.provideUser(userRecieve.getId());
         User userGiver = UserService.provideUser(offer.getUserid());
-        if (userGiver.getBalance() >= offer.getSum()) {
+        if (/*userGiver.getBalance() >= offer.getSum()*/true) {
             userReciever.setBalance(offer.getSum() + userReciever.getBalance());
             userReciever.setDebt(offer.getSum() + userReciever.getDebt());
-            userGiver.setBalance(userGiver.getBalance() - offer.getSum());
+            //userGiver.setBalance(userGiver.getBalance() - offer.getSum());
             offer.setIsAccepted(true);
+            TransferService.createTransfer(new TransferClient(userGiver.getId(), userReciever.getId(), offer.getSum()));
             return 0;
         }
         else{
@@ -50,6 +54,7 @@ public class OfferService {
             if((userGiver.getBalance() >= offer.getSum()) & (offer.getSum() >= 0)){
                 offer.setUsername(userGiver.getName());
                 offer.setIsAccepted(false);
+                UserService.provideUser(offer.getUserid()).setBalance(UserService.provideUser(offer.getUserid()).getBalance() - offer.getSum());
                 offerRepository.createOffer(offer);
                 return offer;
             }

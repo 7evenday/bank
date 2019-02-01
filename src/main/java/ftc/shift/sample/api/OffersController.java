@@ -56,10 +56,17 @@ public class OffersController {
         }
     }
 
-    @DeleteMapping(OFFER_PATH)
-    public ResponseEntity<?> deleteOffer(@RequestBody Offer offer, @RequestBody User user) {
-        String id = offer.getId();
-        service.deleteOffer(id, user);
-        return ResponseEntity.ok().build(); //нет тела, только статус
+    @DeleteMapping(OFFER_PATH + "/{id}/delete")
+    public ResponseEntity<?> deleteOffer(@PathVariable String id, @RequestParam (required = true) String ownerId) {
+        Offer offer = service.provideOffer(id);
+        if (offer.getUserid().equals(ownerId)) {
+            service.deleteOffer(id);
+            return ResponseEntity.ok().build();
+        }
+        else
+        {
+            return ResponseEntity.badRequest().build();
+        }
+         //нет тела, только статус
     }
 }

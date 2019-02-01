@@ -9,7 +9,7 @@ public interface OfferRepository {
 
     Offer fetchOffer(String id);
 
-    void deleteOffer(String id, User user);
+    void deleteOffer(String id);
 
     Offer createOffer(Offer offer);
 
