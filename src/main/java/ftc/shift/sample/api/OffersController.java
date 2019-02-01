@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.jws.soap.SOAPBinding;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -56,7 +57,7 @@ public class OffersController {
         }
     }
 
-    @PatchMapping(OFFER_PATH + "/{id}/accept")
+    @PatchMapping(OFFER_PATH + "/{id}/accept_optional")
     public ResponseEntity<?> acceptOffer(@PathVariable String id, @RequestBody User user){
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         System.out.println(request.getRemoteAddr() + " :: " + (new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime())) + " : " + "PATCH " + OFFER_PATH + "/" + id + "/accept" + "by" + user.getName());
@@ -69,6 +70,26 @@ public class OffersController {
             } else {
                 return ResponseEntity.badRequest().build();
             }
+        }
+    }
+
+    @PatchMapping(OFFER_PATH + "/{id}/accept")
+    public ResponseEntity<?> acceptOfferByID(@PathVariable String id, @RequestBody(required = false) User user, @RequestParam (required = false) String userid){
+        //HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        //System.out.println(request.getRemoteAddr() + " :: " + (new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss").format(Calendar.getInstance().getTime())) + " : " + "PATCH " + OFFER_PATH + "/" + id + "/accept" + "by" + user.getName());
+        if ((user.getId() != userid) & (userid != null) & (user != null)) {
+            return ResponseEntity.badRequest().build();
+        }
+        if (user == null) {
+            if (userid != null) {
+                return acceptOffer(id, UserService.provideUser(userid));
+            }
+            else{
+                return ResponseEntity.badRequest().build();
+            }
+        }
+        else {
+            return acceptOffer(id, user);
         }
     }
 
